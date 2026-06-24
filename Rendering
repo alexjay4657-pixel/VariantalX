@@ -1,0 +1,221 @@
+# Rendering Engine
+
+The VariantalX Rendering Engine (VXRender) is responsible for processing images, visual assets, custom renders, and runtime visual elements.
+
+VXRender supports both built-in rendering systems and user-uploaded content.
+
+---
+
+## Supported Render Types
+
+| Type          | Description               |
+| ------------- | ------------------------- |
+| Image         | Static image files        |
+| Sprite        | Game and UI sprites       |
+| Texture       | Surface textures          |
+| RenderLayer   | Layered visual elements   |
+| DynamicRender | Runtime-generated visuals |
+| VariantRender | Variant-dependent visuals |
+
+---
+
+## Uploading Custom Images
+
+Users may upload custom image assets.
+
+```vx
+render.upload<
+    file="logo.png"
+>;
+```
+
+Supported formats:
+
+```text
+.png
+.jpg
+.jpeg
+.webp
+.vxr
+```
+
+---
+
+## Loading Images
+
+Load an image into memory.
+
+```vx
+image = render.load<
+    "background.png"
+>;
+```
+
+---
+
+## Displaying Images
+
+Display a render on screen.
+
+```vx
+render.display<
+    image
+>;
+```
+
+---
+
+## Render Layers
+
+Render Layers control draw order.
+
+```vx
+layer Background = 0;
+layer Interface = 5;
+layer Overlay = 10;
+```
+
+Assign:
+
+```vx
+render.layer<
+    image,
+    Background
+>;
+```
+
+---
+
+## Dynamic Rendering
+
+Generate visual content during runtime.
+
+```vx
+dynamicRender {
+
+    width = 1920;
+    height = 1080;
+
+}
+```
+
+---
+
+## Variant Rendering
+
+Different variants may display different visual assets.
+
+```vx
+variant<1> {
+
+    render.load<"classic_ui.png">;
+
+}
+
+variant<2> {
+
+    render.load<"modern_ui.png">;
+
+}
+```
+
+---
+
+## Image Scaling
+
+Resize images during rendering.
+
+```vx
+render.scale<
+    image,
+    width=500,
+    height=500
+>;
+```
+
+---
+
+## Transparency
+
+Control image transparency.
+
+```vx
+render.opacity<
+    image,
+    0.75
+>;
+```
+
+---
+
+## Runtime Asset Loading
+
+Load assets while the application is running.
+
+```vx
+runtime.loadRender<
+    "event_banner.png"
+>;
+```
+
+---
+
+## Custom Render Packages
+
+Users may create render packages.
+
+```vx
+package HolidayTheme {
+
+    include<
+        "snow.png",
+        "lights.png",
+        "banner.png"
+    >;
+
+}
+```
+
+Load package:
+
+```vx
+render.package<
+    HolidayTheme
+>;
+```
+
+---
+
+## Rendering Performance
+
+Recommended limits:
+
+```text
+Maximum Image Size: 8192x8192
+Maximum Render Layers: 128
+Maximum Package Size: 500 MB
+```
+
+---
+
+## Example
+
+```vx
+logo = render.load<
+    "logo.png"
+>;
+
+render.scale<
+    logo,
+    width=250,
+    height=250
+>;
+
+render.display<
+    logo
+>;
+```
+
+##
+
+VXRender is available in VariantalX Runtime v2.3 and later.
