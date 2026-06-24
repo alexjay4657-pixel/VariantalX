@@ -1,2 +1,2 @@
 # VariantalX
-Code every posibility
+Code every posibility 
