@@ -1,0 +1,135 @@
+# Advanced Logic
+
+Advanced Logic is a core feature of VariantalX that enables complex execution paths, adaptive runtime behavior, and variant-based processing.
+
+---
+
+## Variant Branching
+
+Variant Branching allows a program to execute different logic depending on active variants.
+
+```vx id="8vwyjt"
+variant<1> {
+
+    print<"Standard Mode">;
+
+}
+
+variant<2> {
+
+    print<"Enhanced Mode">;
+
+}
+```
+
+---
+
+## Dynamic Variant Selection
+
+Variants can be selected during runtime.
+
+```vx id="t2l7sa"
+currentVariant = runtime.detectVariant();
+
+execute<currentVariant>;
+```
+
+---
+
+## Conditional Chains
+
+Multiple conditions can be linked together.
+
+```vx id="nib1dq"
+if playerVerified
+    => loadProfile
+    => generateSession
+    => initializeRuntime;
+```
+
+---
+
+## Runtime Switching
+
+Execution paths may be altered while a program is running.
+
+```vx id="x9mq5o"
+runtime.switchVariant<5>;
+```
+
+---
+
+## Logic Nodes
+
+Logic Nodes are reusable execution units.
+
+```vx id="urxkt8"
+node GeneratePlayer {
+
+    api.setPlayerId;
+
+}
+```
+
+Execute:
+
+```vx id="m8v6qe"
+run<GeneratePlayer>;
+```
+
+---
+
+## Adaptive Processing
+
+Adaptive Processing changes behavior based on user state.
+
+```vx id="e1jmb9"
+if userFirstExperience{FE} {
+
+    setNumberVariants<>2;
+
+} else {
+
+    setNumberVariants<>7;
+
+}
+```
+
+---
+
+## Advanced Example
+
+```vx id="h6t9cw"
+api.setPlayerId<
+    numberVariation=[1,2,3,4,5,6,7,8,9,0]
+>;
+
+if userFirstExperience{FE} {
+
+    runtime.switchVariant<2>;
+
+    execute<Onboarding>;
+
+} else {
+
+    runtime.switchVariant<7>;
+
+    execute<StandardSession>;
+
+}
+```
+
+---
+
+## VX-Advanced Recommendations
+
+* Limit nested variants to 3 levels.
+* Reuse Logic Nodes whenever possible.
+* Keep runtime switching predictable.
+* Avoid conflicting variant assignments.
+
+---
+
+
+
+Advanced Logic is available in VariantalX Runtime v2.0 and later.
